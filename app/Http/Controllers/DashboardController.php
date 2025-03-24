@@ -17,6 +17,9 @@ class DashboardController extends Controller
         $all = $map["all"];
         $ticket = $map["ticket"];
         $lead = $map["lead"];
+        $totalClientBudget = $map["totalClientBudget"];
+        $totalTicketExpense = $map["totalTicketExpense"];
+        $totalLeadExpense = $map["totalLeadExpense"];
 
         $allCollection = collect($all);
         $ticketCollection = collect($ticket);
@@ -55,6 +58,7 @@ class DashboardController extends Controller
                 'allLabels', 'allData',
                 'ticketLabels', 'ticketData',
                 'leadLabels', 'leadData',
+                'totalClientBudget', 'totalTicketExpense', 'totalLeadExpense'
             )
         );
     }
