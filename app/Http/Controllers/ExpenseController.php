@@ -10,12 +10,12 @@ class ExpenseController extends Controller
 {
     private string $expenseBaseUrl = "http://localhost:8080/api/expenses";
 
-    public function index()
+    public function ticketsExpenses(): object
     {
-        $response = Http::get($this->expenseBaseUrl);
+        $response = Http::get($this->expenseBaseUrl . '/tickets');
         $expenses = $response->json();
 
-        return view('admin/expenses/list-expense', compact('expenses'));
+        return view('admin/expenses/list-tickets-expenses', compact('expenses'));
     }
 
     public function editShow(int $id)
