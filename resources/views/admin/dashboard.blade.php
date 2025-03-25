@@ -20,7 +20,11 @@
                                     <p class="text-muted">TOTAL CLIENT BUDGET</p>
                                 </div>
                                 <div class="ml-auto">
-                                    <h2 class="counter text-primary font-18">{{ number_format($totalClientBudget, 2, ',', ' ') }}</h2>
+                                    <h2 class="counter text-primary font-18">
+                                        <a href="{{ url('/budgets')  }}">
+                                            {{ number_format($totalClientBudget, 2, ',', ' ') }}
+                                        </a>
+                                    </h2>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +48,11 @@
                                     <p class="text-muted">TOTAL TICKETS EXPENSES</p>
                                 </div>
                                 <div class="ml-auto">
-                                    <h2 class="counter text-cyan font-18">{{ number_format($totalTicketExpense, 2, ',', ' ') }}</h2>
+                                    <h2 class="counter text-cyan font-18">
+                                        <a href="{{ url('/expenses/ticket')  }}">
+                                            {{ number_format($totalTicketExpense, 2, ',', ' ') }}
+                                        </a>
+                                    </h2>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +76,11 @@
                                     <p class="text-muted">TOTAL LEADS EXPENSES</p>
                                 </div>
                                 <div class="ml-auto">
-                                    <h2 class="counter text-purple font-18">{{ number_format($totalLeadExpense, 2, ',', ' ') }}</h2>
+                                    <h2 class="counter text-purple font-18">
+                                        <a href="{{ url('/expenses/ticket')  }}">
+                                            {{ number_format($totalLeadExpense, 2, ',', ' ') }}
+                                        </a>
+                                    </h2>
                                 </div>
                             </div>
                         </div>

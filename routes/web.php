@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BudgetConfigController;
+use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\AuthController;
@@ -35,5 +36,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', [ExpenseController::class, 'editShow'])->name('expenses.edit.show');
         Route::post('/edit/{id}', [ExpenseController::class, 'editProcess'])->name('expenses.edit.process');
         Route::get('/delete/{id}', [ExpenseController::class, 'delete'])->name('expenses.delete');
+    });
+
+    Route::group(['prefix' => 'budgets'], function () {
+        Route::get('', [BudgetController::class, 'index'])->name('budgets.index');
     });
 });
