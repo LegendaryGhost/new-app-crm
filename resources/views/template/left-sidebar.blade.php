@@ -9,6 +9,13 @@
                         <img src="{{asset('/images/pp.png')}}" class="img-circle">
                         <span class="hide-menu">Admin</span>
                     </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            <form action="{{ url('/logout') }}" method="get">
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-power-off"></i> Logout</button>
+                            </form>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-small-cap">--- Dashboard</li>
                 <li>
