@@ -101,8 +101,14 @@
             <div class="row">
                 <div class="card col-md-6">
                     <div class="card-body">
-                        <h4 class="card-title">Expenses evolution</h4>
+                        <h4 class="card-title">Monthly expenses evolution</h4>
                         <canvas id="allChart" style="width: 200px; height: 200px"></canvas>
+                    </div>
+                </div>
+                <div class="card col-md-6">
+                    <div class="card-body">
+                        <h4 class="card-title">Expenses by Type</h4>
+                        <canvas id="expenseTypesChart" style="width: 200px; height: 200px"></canvas>
                     </div>
                 </div>
                 <div class="card col-md-6">
@@ -127,6 +133,10 @@
         const allCanvasId = "allChart";
         const allLabels = {!! json_encode($allLabels) !!};
         const allData = {!! json_encode($allData) !!};
+
+        const expenseTypesCanvasId = "expenseTypesChart";
+        const expenseTypesLabels = {!! json_encode($expenseTypesLabels) !!};
+        const expenseTypesData = {!! json_encode($expenseTypesData) !!};
 
         const ticketCanvasId = "ticketChart";
         const ticketLabels = {!! json_encode($ticketLabels) !!};
@@ -186,8 +196,32 @@
             });
         }
 
+        function generatePieChart(canvasId, titre, labels, data) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: titre,
+                        data: data,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
-            generateLineChart(allCanvasId, 'Toutes les depenses', allLabels, allData);
+            generateLineChart(allCanvasId, 'Monthly expenses', allLabels, allData);
+            generatePieChart(expenseTypesCanvasId, 'Expenses per type', expenseTypesLabels, expenseTypesData);
             generateBarChart(ticketCanvasId, 'Depenses Tickets', ticketLabels, ticketData);
             generateBarChart(leadCanvasId, 'Depenses Leads', leadLabels, leadData);
         })

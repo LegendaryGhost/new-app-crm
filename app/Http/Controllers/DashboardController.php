@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Support\Facades\Http;
 
 class DashboardController extends Controller
@@ -15,6 +16,7 @@ class DashboardController extends Controller
         $map = $response->json();
 
         $all = $map["all"];
+        $expenseTypes = $map["expenseTypes"];
         $ticket = $map["ticket"];
         $lead = $map["lead"];
         $totalClientBudget = $map["totalClientBudget"];
@@ -26,11 +28,11 @@ class DashboardController extends Controller
         $leadCollection = collect($lead);
 
         $allParJour = $allCollection->groupBy(function ($all) {
-            return $all['creationDate'];
-//            return $all['creationDate']->format('Y-m-d');
-        })->map(function ($allJour) {
-            return $allJour->sum('amount');
-        });
+            $date = DateTime::createFromFormat('Y-m-d\TH:i:s', $all['creationDate']);
+            return $date->format('Y-m');
+        })->map(function ($allMois) {
+            return $allMois->sum('amount');
+        })->sortKeys();
         $allLabels = $allParJour->keys()->toArray();
         $allData = $allParJour->values()->toArray();
 
@@ -52,13 +54,19 @@ class DashboardController extends Controller
         $leadLabels = $leadParJour->keys()->toArray();
         $leadData = $leadParJour->values()->toArray();
 
+        // Traitement des données expenseTypes pour le camembert
+        $expenseTypesCollection = collect($expenseTypes);
+        $expenseTypesLabels = $expenseTypesCollection->pluck('type')->toArray(); // ["tickets", "leads"]
+        $expenseTypesData = $expenseTypesCollection->pluck('amount')->toArray(); // [485600.0, 288000.0]
+
         return view(
             '/admin/dashboard',
             compact(
                 'allLabels', 'allData',
                 'ticketLabels', 'ticketData',
                 'leadLabels', 'leadData',
-                'totalClientBudget', 'totalTicketExpense', 'totalLeadExpense'
+                'totalClientBudget', 'totalTicketExpense', 'totalLeadExpense',
+                'expenseTypesLabels', 'expenseTypesData' // Ajout des nouvelles variables
             )
         );
     }
