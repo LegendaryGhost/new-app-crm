@@ -41,5 +41,6 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'budgets'], function () {
         Route::get('', [BudgetController::class, 'index'])->name('budgets.index');
+        Route::get('/{id}/delete', [BudgetController::class, 'delete'])->name('budgets.delete');
     });
 });
