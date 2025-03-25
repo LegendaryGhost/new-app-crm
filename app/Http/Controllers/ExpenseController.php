@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -10,15 +11,23 @@ class ExpenseController extends Controller
 {
     private string $expenseBaseUrl = "http://localhost:8080/api/expenses";
 
-    public function index()
+    public function ticketsExpenses(): object
     {
-        $response = Http::get($this->expenseBaseUrl);
+        $response = Http::get($this->expenseBaseUrl . '/tickets');
         $expenses = $response->json();
 
-        return view('admin/expenses/list-expense', compact('expenses'));
+        return view('admin/expenses/list-tickets-expenses', compact('expenses'));
     }
 
-    public function editShow(int $id)
+    public function leadsExpenses(): object
+    {
+        $response = Http::get($this->expenseBaseUrl . '/leads');
+        $expenses = $response->json();
+
+        return view('admin/expenses/list-leads-expenses', compact('expenses'));
+    }
+
+    public function editShow(int $id): object
     {
         $response = Http::get("{$this->expenseBaseUrl}/{$id}");
 
@@ -48,8 +57,7 @@ class ExpenseController extends Controller
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('message', $jsonResponse['message'])
-                ->with('warningsBudget', $jsonResponse['data']);
+                ->with('message', $jsonResponse['message']);
 
         } catch (\Exception $e) {
             Log::error('Erreur lors de la mise à jour de la dépense:', [

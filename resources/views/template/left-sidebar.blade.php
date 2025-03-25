@@ -17,8 +17,11 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                     <ul class="collapse">
-                        <li><a th:href="${'/budget/form'}">Insérer Budget</a></li>
-                        <li><a th:href="${'/budget'}">Liste budgets</a></li>
+                        <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url('/configurations/expense-threshold/edit') }}">Edit expense threshold</a></li>
+                        <li><a href="{{ url('/budgets') }}">All budgets</a></li>
+                        <li><a href="{{ url('/expenses/tickets') }}">Tickets expenses</a></li>
+                        <li><a href="{{ url('/expenses/leads') }}">Leads expenses</a></li>
                     </ul>
                 </li>
             </ul>
