@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/leads', [ExpenseController::class, 'leadsExpenses'])->name('expenses.leads');
         Route::get('/edit/{id}', [ExpenseController::class, 'editShow'])->name('expenses.edit.show');
         Route::post('/edit/{id}', [ExpenseController::class, 'editProcess'])->name('expenses.edit.process');
-        Route::get('/delete/{id}', [ExpenseController::class, 'delete'])->name('expenses.delete');
+        Route::get('/{id}/delete', [ExpenseController::class, 'delete'])->name('expenses.delete');
     });
 
     Route::group(['prefix' => 'budgets'], function () {
