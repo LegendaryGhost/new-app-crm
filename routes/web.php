@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BudgetConfigController;
+use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenseController;
@@ -26,9 +26,9 @@ Route::get('/logout', [AuthController::class, 'logout'])
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-    Route::group(['prefix' => 'configs'], function () {
-        Route::get('/edit', [BudgetConfigController::class, 'editShow'])->name('configs.edit.show');
-        Route::post('/edit', [BudgetConfigController::class, 'editProcess'])->name('configs.edit.process');
+    Route::group(['prefix' => 'configurations'], function () {
+        Route::get('/expense-threshold/edit', [ConfigurationController::class, 'showEditExpenseThreshold'])->name('configurations.edit.show');
+        Route::post('/expense-threshold/edit', [ConfigurationController::class, 'processEditExpenseThreshold'])->name('configurations.edit.process');
     });
 
     Route::group(['prefix' => 'expenses'], function () {
