@@ -27,7 +27,7 @@ class ExpenseController extends Controller
         return view('admin/expenses/list-leads-expenses', compact('expenses'));
     }
 
-    public function editShow(int $id)
+    public function editShow(int $id): object
     {
         $response = Http::get("{$this->expenseBaseUrl}/{$id}");
 
@@ -57,8 +57,7 @@ class ExpenseController extends Controller
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('message', $jsonResponse['message'])
-                ->with('warningsBudget', $jsonResponse['data']);
+                ->with('message', $jsonResponse['message']);
 
         } catch (\Exception $e) {
             Log::error('Erreur lors de la mise à jour de la dépense:', [

@@ -35,6 +35,7 @@
                                 <th>Lead</th>
                                 <th>Status</th>
                                 <th>Customer</th>
+                                <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
                             </thead>
@@ -48,6 +49,7 @@
                                     <td>{{ $expense['lead']['name'] }}</td>
                                     <td>{{ $expense['lead']['status'] }}</td>
                                     <td>{{ $expense['lead']['customer']['name'] }}</td>
+                                    <td><a href="{{ url('/expenses/' . $expense['id'] . '/edit') }}"><i class="fas fa-edit"></i></a></td>
                                     <td>
                                         <a href="{{ url('/expenses/' . $expense['id'] . '/delete') }}" class="btn btn-primary">
                                             <i class="mdi mdi-delete"></i>
