@@ -17,6 +17,7 @@ class DashboardController extends Controller
 
         $all = $map["all"];
         $expenseTypes = $map["expenseTypes"];
+        $customerExpenses = $map["customerExpenses"];
         $ticket = $map["ticket"];
         $lead = $map["lead"];
         $totalClientBudget = $map["totalClientBudget"];
@@ -54,10 +55,14 @@ class DashboardController extends Controller
         $leadLabels = $leadParJour->keys()->toArray();
         $leadData = $leadParJour->values()->toArray();
 
-        // Traitement des données expenseTypes pour le camembert
         $expenseTypesCollection = collect($expenseTypes);
         $expenseTypesLabels = $expenseTypesCollection->pluck('type')->toArray(); // ["tickets", "leads"]
         $expenseTypesData = $expenseTypesCollection->pluck('amount')->toArray(); // [485600.0, 288000.0]
+
+        $customerExpensesCollection = collect($customerExpenses);
+        $customerExpensesLabels = $customerExpensesCollection->pluck('customerName')->toArray();
+        $customerBudgetsData = $customerExpensesCollection->pluck('budget')->toArray();
+        $customerExpensesData = $customerExpensesCollection->pluck('expense')->toArray();
 
         return view(
             '/admin/dashboard',
@@ -66,7 +71,8 @@ class DashboardController extends Controller
                 'ticketLabels', 'ticketData',
                 'leadLabels', 'leadData',
                 'totalClientBudget', 'totalTicketExpense', 'totalLeadExpense',
-                'expenseTypesLabels', 'expenseTypesData' // Ajout des nouvelles variables
+                'expenseTypesLabels', 'expenseTypesData',
+                'customerExpensesLabels', 'customerBudgetsData', 'customerExpensesData'
             )
         );
     }
