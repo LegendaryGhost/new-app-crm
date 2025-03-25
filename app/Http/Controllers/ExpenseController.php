@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -16,6 +17,14 @@ class ExpenseController extends Controller
         $expenses = $response->json();
 
         return view('admin/expenses/list-tickets-expenses', compact('expenses'));
+    }
+
+    public function leadsExpenses(): object
+    {
+        $response = Http::get($this->expenseBaseUrl . '/leads');
+        $expenses = $response->json();
+
+        return view('admin/expenses/list-leads-expenses', compact('expenses'));
     }
 
     public function editShow(int $id)

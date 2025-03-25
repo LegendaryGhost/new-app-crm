@@ -19,7 +19,8 @@
                     <ul class="collapse">
                         <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                         <li><a href="{{ url('/budgets') }}">All budgets</a></li>
-                        <li><a href="{{ url('/expenses/tickets') }}">Ticket expenses</a></li>
+                        <li><a href="{{ url('/expenses/tickets') }}">Tickets expenses</a></li>
+                        <li><a href="{{ url('/expenses/leads') }}">Leads expenses</a></li>
                     </ul>
                 </li>
             </ul>

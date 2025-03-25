@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="ml-auto">
                                     <h2 class="counter text-cyan font-18">
-                                        <a href="{{ url('/expenses/ticket')  }}">
+                                        <a href="{{ url('/expenses/tickets')  }}">
                                             {{ number_format($totalTicketExpense, 2, ',', ' ') }}
                                         </a>
                                     </h2>
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="ml-auto">
                                     <h2 class="counter text-purple font-18">
-                                        <a href="{{ url('/expenses/ticket')  }}">
+                                        <a href="{{ url('/expenses/leads')  }}">
                                             {{ number_format($totalLeadExpense, 2, ',', ' ') }}
                                         </a>
                                     </h2>
