@@ -33,6 +33,7 @@
                                 <th>Amount</th>
                                 <th>Creation date</th>
                                 <th>Customer</th>
+                                <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
                             </thead>
@@ -43,7 +44,8 @@
                                     <td>{{ $budget['name'] }}</td>
                                     <td>{{ number_format($budget['amount'], 2, ',', ' ') }}</td>
                                     <td>{{ date('d/m/Y H:i', strtotime($budget['createdAt'])) }}</td>
-                                    <td>{{ $budget['customer']['name'] ?? '-' }}</td>
+                                    <td>{{ $budget['customer']['name'] ?? '-' }}
+                                    <td><a href="{{ url('/budgets/' . $budget['id'] . '/edit') }}"><i class="fas fa-edit"></i></a></td>
                                     <td>
                                         <a href="{{ url('/budgets/' . $budget['id'] . '/delete') }}" class="btn btn-primary">
                                             <i class="mdi mdi-delete"></i>

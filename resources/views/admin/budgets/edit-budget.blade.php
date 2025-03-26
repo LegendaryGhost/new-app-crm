@@ -3,7 +3,7 @@
 @extends('template/template')
 
 @section('title')
-    Update expense
+    Update budget
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Update expense</h4>
+                    <h4 class="card-title">Update budget</h4>
 
                     @if(session('message'))
                         <div class="alert alert-success">
@@ -24,15 +24,15 @@
                         </div>
                     @endif
 
-                    <form action="{{ url('/expenses/' . $expense['id'] . '/edit') }}" id="email-form" method="post">
+                    <form action="{{ url('/budgets/' . $budget['id'] . '/edit') }}" id="email-form" method="post">
                         @csrf
 
-                        <p class="m-t-20">Description: {{ $expense['description']  }}</p>
+                        <p class="m-t-20">Description: {{ $budget['name']  }}</p>
 
                         <label class="m-t-20" for="amount">Amount:</label>
                         <div class="input-group">
                             <input type="number" id="amount" name="amount" class="form-control"
-                                   value="{{ old('amount', number_format($expense['amount'], 2, '.', '')) }}" step="0.01" min="0">
+                                   value="{{ old('amount', number_format($budget['amount'], 2, '.', '')) }}" step="0.01" min="0">
                         </div>
                         @error('amount')
                         <div class="input-group">
@@ -40,7 +40,7 @@
                         </div>
                         @enderror
 
-                        <button type="submit" class="btn btn-primary m-t-20">Update expense</button>
+                        <button type="submit" class="btn btn-primary m-t-20">Update budget</button>
                     </form>
                 </div>
             </div>
