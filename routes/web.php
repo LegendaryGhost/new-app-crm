@@ -5,6 +5,7 @@ use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ImportController;
 use Illuminate\Support\Facades\Route;
 
 // login
@@ -44,5 +45,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}/edit', [BudgetController::class, 'editShow'])->name('budgets.edit.show');
         Route::post('/{id}/edit', [BudgetController::class, 'editProcess'])->name('budgets.edit.process');
         Route::get('/{id}/delete', [BudgetController::class, 'delete'])->name('budgets.delete');
+    });
+
+    Route::group(['prefix' => 'import'], function () {
+        Route::get('', [ImportController::class, 'editShow'])->name('import.edit.show');
+        Route::post('', [ImportController::class, 'editProcess'])->name('import.edit.process');
     });
 });

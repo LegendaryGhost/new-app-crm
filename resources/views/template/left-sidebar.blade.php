@@ -29,6 +29,7 @@
                         <li><a href="{{ url('/budgets') }}">All budgets</a></li>
                         <li><a href="{{ url('/expenses/tickets') }}">Tickets expenses</a></li>
                         <li><a href="{{ url('/expenses/leads') }}">Leads expenses</a></li>
+                        <li><a href="{{ url('/import') }}">Import</a></li>
                     </ul>
                 </li>
             </ul>
