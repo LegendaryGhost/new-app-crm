@@ -39,9 +39,9 @@
                             </div>
 
                             @if(session('message'))
-                                <div class="alert alert-warning">
-                                    <h4>{{ session('message') }}</h4>
-                                    <p>{{ session('error')  }}</p>
+                                <div class="alert alert-danger">
+                                    <strong>{{ session('message') }}</strong>
+                                    <span>{{ session('error')  }}</span>
                                 </div>
                             @endif
 
