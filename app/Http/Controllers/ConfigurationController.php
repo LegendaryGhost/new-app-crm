@@ -6,27 +6,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class BudgetConfigController extends Controller
+class ConfigurationController extends Controller
 {
-    private string $configBaseUrl = "http://localhost:8080/api/budget-alert-configs";
+    private string $configBaseUrl = "http://localhost:8080/api/configurations";
 
-    public function editShow()
+    public function showEditExpenseThreshold(): object
     {
-        $response = Http::get($this->configBaseUrl);
-        $config = $response->json();
+        $response = Http::get($this->configBaseUrl . '/expense-threshold');
+        $threshold = $response->json();
 
-        return view('admin/configs/edit-config', compact('config'));
+        return view('admin/configurations/edit-expense-threshold', compact('threshold'));
     }
 
-    public function editProcess(Request $request)
+    public function processEditExpenseThreshold(Request $request): object
     {
         try {
             $validated = $request->validate([
-                'rate' => 'required|numeric|between:0,100'
+                'threshold' => 'required|numeric|min:0'
             ]);
 
-            $response = Http::asForm()->post("{$this->configBaseUrl}", [
-                "rate" => $validated['rate']
+            $response = Http::asForm()->put($this->configBaseUrl . '/expense-threshold', [
+                "threshold" => $validated['threshold']
             ]);
             $response->throw(); // Lance une exception si la réponse n'est pas réussie
 
@@ -38,7 +38,7 @@ class BudgetConfigController extends Controller
                 ->with('message', $jsonResponse['message']);
 
         } catch (\Exception $e) {
-            Log::error('Erreur lors de la mise à jour de la config:', [
+            Log::error('An error occured while processing edit expense threshold:', [
                 'error' => $e->getMessage(),
                 'status_code' => method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500
             ]);
@@ -46,7 +46,7 @@ class BudgetConfigController extends Controller
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('error', 'Échec de la mise à jour');
+                ->with('error', $e->getMessage());
         }
     }
 }

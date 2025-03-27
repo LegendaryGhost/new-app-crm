@@ -7,34 +7,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class ExpenseController extends Controller
+class BudgetController extends Controller
 {
-    private string $expenseBaseUrl = "http://localhost:8080/api/expenses";
+    private string $budgetBaseUrl = "http://localhost:8080/api/budgets";
 
-    public function ticketsExpenses(): object
+    public function index(): object
     {
-        $response = Http::get($this->expenseBaseUrl . '/tickets');
-        $expenses = $response->json();
-
-        return view('admin/expenses/list-tickets-expenses', compact('expenses'));
-    }
-
-    public function leadsExpenses(): object
-    {
-        $response = Http::get($this->expenseBaseUrl . '/leads');
-        $expenses = $response->json();
-
-        return view('admin/expenses/list-leads-expenses', compact('expenses'));
+        $response = Http::get($this->budgetBaseUrl);
+        $budgets = $response->json();
+        return view('admin/budgets/list-budgets', compact('budgets'));
     }
 
     public function editShow(int $id): object
     {
-        $response = Http::get("{$this->expenseBaseUrl}/{$id}");
+        $response = Http::get("{$this->budgetBaseUrl}/{$id}");
 
         if ($response->successful()) {
-            $expense = $response->json();
+            $budget = $response->json();
 
-            return view('admin/expenses/edit-expense', compact('expense'));
+            return view('admin/budgets/edit-budget', compact('budget'));
         } else {
             throw new HttpClientException($response->body());
         }
@@ -47,7 +38,7 @@ class ExpenseController extends Controller
                 'amount' => 'required|numeric|min:0'
             ]);
 
-            $response = Http::asForm()->put("{$this->expenseBaseUrl}/{$id}", [
+            $response = Http::asForm()->put("{$this->budgetBaseUrl}/{$id}", [
                 "newAmount" => $validatedData['amount']
             ]);
             $response->throw(); // Lance une exception si la réponse n'est pas réussie
@@ -75,14 +66,14 @@ class ExpenseController extends Controller
     public function delete(int $id)
     {
         try {
-            $response = Http::delete("{$this->expenseBaseUrl}/{$id}");
+            $response = Http::delete("{$this->budgetBaseUrl}/{$id}");
 
             if ($response->successful()) {
-                $expense = $response->json();
+                $budget = $response->json();
 
                 return redirect()
                     ->back()
-                    ->with('message', $expense['message']);
+                    ->with('message', $budget['message']);
             }
         } catch (\Exception $e) {
             Log::error('Erreur lors de la suppression de la dépense:', [
@@ -95,4 +86,5 @@ class ExpenseController extends Controller
                 ->with('error', 'Échec de la suppression');
         }
     }
+
 }

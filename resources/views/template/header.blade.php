@@ -43,23 +43,13 @@
                             <i class="fa fa-angle-down"></i>
                         </span>
                     </a>
-{{--                    <div class="dropdown-menu dropdown-menu-right animated flipInY">--}}
-{{--                        <!-- text-->--}}
-{{--                        <a th:if="${!#authorization.expression('hasRole(''ROLE_CUSTOMER'')')}"--}}
-{{--                           th:href="${home + 'employee/profile'}" class="dropdown-item"><i class="ti-user"></i> My Profile</a>--}}
-{{--                        <a th:if="${#authorization.expression('hasRole(''ROLE_CUSTOMER'')')}"--}}
-{{--                           th:href="${home + 'customer/profile'}" class="dropdown-item"><i class="ti-user"></i> My Profile</a>--}}
-{{--                        <!-- text-->--}}
-{{--                        <div class="dropdown-divider"></div>--}}
-{{--                        <a th:if="${#authentication.principal instanceof T(org.springframework.security.core.userdetails.User) and !#authorization.expression('hasRole(''ROLE_CUSTOMER'')')}"--}}
-{{--                           th:href="${home + 'change-password'}" class="dropdown-item"><i class="fas fa-key"></i> change password</a>--}}
-{{--                        <div class="dropdown-divider"></div>--}}
-{{--                        <!-- text-->--}}
-{{--                        <form th:action="@{/logout}" method="post">--}}
-{{--                            <button type="submit"><i class="fa fa-power-off"></i> Logout</button>--}}
-{{--                        </form>--}}
-{{--                        <!-- text-->--}}
-{{--                    </div>--}}
+                    <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                        <!-- text-->
+                        <form action="{{ url('/logout') }}" method="get">
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-power-off"></i> Logout</button>
+                        </form>
+                        <!-- text-->
+                    </div>
                 </li>
                 <!-- ============================================================== -->
                 <!-- End User Profile -->

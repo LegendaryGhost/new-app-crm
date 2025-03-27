@@ -3,9 +3,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container vh-100 d-flex align-items-center justify-content-center">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title text-center">Connexion</h3>
@@ -39,18 +39,16 @@
                             </div>
 
                             @if(session('message'))
-                                <div class="alert alert-warning">
-                                    <h4>{{ session('message') }}</h4>
-                                    <p>{{ session('error')  }}</p>
+                                <div class="alert alert-danger">
+                                    <strong>{{ session('message') }}</strong>
+                                    <span>{{ session('error')  }}</span>
                                 </div>
                             @endif
 
-                            <div class="row mb-0">
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">
-                                        Connexion
-                                    </button>
-                                </div>
+                            <div class="row mb-0 p-2">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    Connexion
+                                </button>
                             </div>
                         </form>
                     </div>

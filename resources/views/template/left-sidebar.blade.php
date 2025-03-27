@@ -9,6 +9,13 @@
                         <img src="{{asset('/images/pp.png')}}" class="img-circle">
                         <span class="hide-menu">Admin</span>
                     </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            <form action="{{ url('/logout') }}" method="get">
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-power-off"></i> Logout</button>
+                            </form>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-small-cap">--- Dashboard</li>
                 <li>
@@ -17,8 +24,13 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                     <ul class="collapse">
-                        <li><a th:href="${'/budget/form'}">Insérer Budget</a></li>
-                        <li><a th:href="${'/budget'}">Liste budgets</a></li>
+                        <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url('/configurations/expense-threshold/edit') }}">Edit expense threshold</a></li>
+                        <li><a href="{{ url('/budgets') }}">All budgets</a></li>
+                        <li><a href="{{ url('/expenses/tickets') }}">Tickets expenses</a></li>
+                        <li><a href="{{ url('/expenses/leads') }}">Leads expenses</a></li>
+                        <li><a href="{{ url('/import') }}">Import a customer</a></li>
+                        <li><a href="{{ url('/export/pdf/example') }}">Export an example PDF</a></li>
                     </ul>
                 </li>
             </ul>
