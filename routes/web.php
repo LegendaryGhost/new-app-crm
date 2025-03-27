@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\PdfExportController;
 use Illuminate\Support\Facades\Route;
 
 // login
@@ -50,5 +51,9 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'import'], function () {
         Route::get('', [ImportController::class, 'editShow'])->name('import.edit.show');
         Route::post('', [ImportController::class, 'editProcess'])->name('import.edit.process');
+    });
+
+    Route::group(['prefix' => 'export'], function () {
+        Route::get('/pdf/example', [PdfExportController::class, 'generatePdf'])->name('export.pdf.example');
     });
 });

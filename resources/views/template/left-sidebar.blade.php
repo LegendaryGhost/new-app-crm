@@ -29,7 +29,8 @@
                         <li><a href="{{ url('/budgets') }}">All budgets</a></li>
                         <li><a href="{{ url('/expenses/tickets') }}">Tickets expenses</a></li>
                         <li><a href="{{ url('/expenses/leads') }}">Leads expenses</a></li>
-                        <li><a href="{{ url('/import') }}">Import</a></li>
+                        <li><a href="{{ url('/import') }}">Import a customer</a></li>
+                        <li><a href="{{ url('/export/pdf/example') }}">Export an example PDF</a></li>
                     </ul>
                 </li>
             </ul>
